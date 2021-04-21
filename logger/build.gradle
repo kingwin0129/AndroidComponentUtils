@@ -1,5 +1,8 @@
-plugins {
-    id 'com.android.application'
+
+if(isUtilModul.toBoolean()){
+    apply plugin: 'com.android.library'
+}else{
+    apply plugin: 'com.android.application'
 }
 
 android {
@@ -7,13 +10,26 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.kingwin.componentutils"
+        if(!isUtilModul.toBoolean()){
+            applicationId "com.kingwin.logger"
+        }
+
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        main{
+            if(isUtilModul.toBoolean()){
+                manifest.srcFile 'src/main/modulManifest/AndroidManifest.xml'
+            }else{
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
     }
 
     buildTypes {
@@ -33,8 +49,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation project(path: ':logger')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    api 'com.orhanobut:logger:2.2.0'
 }
