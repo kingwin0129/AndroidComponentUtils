@@ -1,3 +1,5 @@
+include ':utils'
+include ':immersion'
 include ':logger'
 include ':app'
 rootProject.name = "ComponentUtils"
