@@ -132,6 +132,7 @@ public class KTitleBar extends RelativeLayout {
     private void initMainView(){
         int height = _config.getMainHeight() == -1 ?KConvertUtils.dp2px(getContext(),56) :KConvertUtils.dp2px(getContext(),_config.getMainHeight());
         RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,height);
+        params.addRule(RelativeLayout.BELOW,R.id.status_view);
         _mainView.setLayoutParams(params);
 
         if(_config.getMainShape() != 0){
