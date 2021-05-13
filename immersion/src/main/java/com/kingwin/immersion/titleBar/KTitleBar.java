@@ -73,7 +73,8 @@ public class KTitleBar extends RelativeLayout {
      * 初始化状态栏
      */
     private void initStatusView(){
-        RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, KStatusBarUtils.getStatusBarHeight(this.getContext()));
+        int height = _config.getStatusHeight() == -1 ?KStatusBarUtils.getStatusBarHeight(this.getContext()) :KConvertUtils.dp2px(getContext(),_config.getStatusHeight());
+        RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
         _statusView.setLayoutParams(params);
         if(_config.isOpenImmersion()){
             KStatusBarUtils.immersionBar(activity.getWindow());
@@ -129,6 +130,10 @@ public class KTitleBar extends RelativeLayout {
      * 初始化标题栏主视图
      */
     private void initMainView(){
+        int height = _config.getMainHeight() == -1 ?KConvertUtils.dp2px(getContext(),56) :KConvertUtils.dp2px(getContext(),_config.getMainHeight());
+        RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,height);
+        _mainView.setLayoutParams(params);
+
         if(_config.getMainShape() != 0){
             _mainView.setBackgroundResource(_config.getMainShape());
         }else{

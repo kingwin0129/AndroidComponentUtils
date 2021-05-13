@@ -21,6 +21,11 @@ import java.util.List;
 public class KImmersionConfig {
 
     /**
+     * 状态栏高度
+     */
+    private final int statusHeight;
+
+    /**
      * 状态栏颜色
      */
     @ColorInt private final int statusColor;
@@ -106,6 +111,7 @@ public class KImmersionConfig {
     private final boolean isOpenImmersion;
 
     KImmersionConfig(KImmersionConfigBuild build){
+        statusHeight = build.statusHeight;
         statusColor = build.statusColor;
         statusShape = build.statusShape;
         mainColor = build.mainColor;
@@ -246,7 +252,20 @@ public class KImmersionConfig {
     }
 
 
+    /**
+     * 获取状态栏高度
+     */
+    public int getStatusHeight() {
+        return statusHeight;
+    }
+
+
     public static class KImmersionConfigBuild{
+
+        /**
+         * 状态栏高度
+         */
+        private int statusHeight;
 
         /**
          * 状态栏颜色
@@ -352,6 +371,8 @@ public class KImmersionConfig {
             leftImg = 0;
             leftImgWidth = 0;
             leftImgHeight = 0;
+            mainHeight = -1;
+            statusHeight = -1;
         }
 
         /**
@@ -491,12 +512,17 @@ public class KImmersionConfig {
             return this;
         }
 
-
+        /**
+         * 设置状态栏高度
+         */
+        public KImmersionConfigBuild setStatusHeight(int statusHeight) {
+            this.statusHeight = statusHeight;
+            return this;
+        }
 
         public KImmersionConfig build(){
             return new KImmersionConfig(this);
         }
-
 
 
     }

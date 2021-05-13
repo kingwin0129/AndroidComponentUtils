@@ -54,14 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         KImmersionConfig config = new KImmersionConfig.KImmersionConfigBuild()
-                .setTitleName("推荐页")
-                .setMenuList(viewList)
-                .setLeftClickListener(new KImmersionConfig.LeftViewClick() {
-                    @Override
-                    public void onClick() {
-                        KLogger.d("左视图点击");
-                    }
-                })
+                .setMainHeight(0)
+                .setStatusHeight(0)
                 .build();
         KImmersionUtils.init(this,R.layout.activity_main,config);
 
