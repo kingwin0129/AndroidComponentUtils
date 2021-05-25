@@ -135,11 +135,9 @@ public class KTitleBar extends RelativeLayout {
         }
 
 
-
-
-        _backView.setCompoundDrawablesRelativeWithIntrinsicBounds(_config.getLeftIRes(),0,0,0);
-//        int width = _config.getLeftImgWidth() == 0 ? KConvertUtils.dp2px(getContext(),22) :_config.getLeftImgWidth();
-//        int height = _config.getLeftImgHeight() == 0 ? KConvertUtils.dp2px(getContext(),22) :_config.getLeftImgHeight();
+        if(_config.getLeftIRes() != -1){
+            _backView.setCompoundDrawablesRelativeWithIntrinsicBounds(_config.getLeftIRes(),0,0,0);
+        }
 
 
         _backView.setText(KStringUtils.ellipsize(_config.getSubhead(), 5));

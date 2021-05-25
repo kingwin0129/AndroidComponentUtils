@@ -30,7 +30,6 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:drawableStart="@drawable/common_back_white"
             android:drawablePadding="2dp"
             android:background="@null"
             />
