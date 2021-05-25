@@ -1,5 +1,6 @@
 package com.kingwin.immersion.titleBar;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,16 +35,15 @@ public class KTitleBar extends RelativeLayout {
     /**
      * 所属界面
      */
-    private AppCompatActivity activity;
+    private Activity activity;
 
     RelativeLayout _statusView;
-    RelativeLayout _backView;
+    TextView _backView;
     LinearLayout _menuView;
     TextView _titleView;
     RelativeLayout _mainView;
-    ImageView _left_img_view;
 
-    public KTitleBar(AppCompatActivity context, KImmersionConfig config) {
+    public KTitleBar(Activity context, KImmersionConfig config) {
         super(context);
         activity = context;
         _config = config;
@@ -61,7 +61,6 @@ public class KTitleBar extends RelativeLayout {
         _menuView = findViewById(R.id.menu_view);
         _titleView = findViewById(R.id.title_view);
         _mainView = findViewById(R.id.main_view);
-        _left_img_view = findViewById(R.id.left_img_view);
 
         initStatusView();
         initTitleView();
@@ -93,32 +92,6 @@ public class KTitleBar extends RelativeLayout {
      * 初始化标题栏
      */
     private void initTitleView(){
-        if(_config.getMode() == KImmersionMode.CENTER){
-            RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(KConvertUtils.dp2px(getContext(),56),ViewGroup.LayoutParams.MATCH_PARENT);
-            _backView.setLayoutParams(params);
-
-            RelativeLayout.LayoutParams params2=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            params2.addRule(RelativeLayout.CENTER_IN_PARENT,1);
-            _titleView.setLayoutParams(params2);
-        }else{
-            RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(KConvertUtils.dp2px(getContext(),30),ViewGroup.LayoutParams.MATCH_PARENT);
-            _backView.setLayoutParams(params);
-
-            RelativeLayout.LayoutParams params2=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            params2.addRule(RelativeLayout.END_OF,R.id.back_view);
-
-            _titleView.setLayoutParams(params2);
-            if(null != _config.getLeftClickListener()){
-                _titleView.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        _config.getLeftClickListener().onClick();
-                    }
-                });
-
-
-            }
-        }
 
         initMainView();
         initTitleTextView();
@@ -146,7 +119,7 @@ public class KTitleBar extends RelativeLayout {
      * 初始化标题文本视图
      */
     private void initTitleTextView(){
-        _titleView.setText(KStringUtils.ellipsize(_config.getTitleName(),_config.getTitleMaxLength()));
+        _titleView.setText(KStringUtils.ellipsize(_config.getTitleName(), _config.getTitleMaxLength()));
         _titleView.setTextColor(_config.getTitleColor());
         _titleView.setTextSize(_config.getTitleSize());
     }
@@ -161,13 +134,17 @@ public class KTitleBar extends RelativeLayout {
             return;
         }
 
-        _left_img_view.setImageResource(_config.getLeftImg() != 0 ? _config.getLeftImg() : R.drawable.ic_back);
-        int width = _config.getLeftImgWidth() == 0 ? KConvertUtils.dp2px(getContext(),22) :_config.getLeftImgWidth();
-        int height = _config.getLeftImgHeight() == 0 ? KConvertUtils.dp2px(getContext(),22) :_config.getLeftImgHeight();
-        RelativeLayout.LayoutParams params3=new RelativeLayout.LayoutParams(width, height);
-        params3.leftMargin = KConvertUtils.dp2px(getContext(),10);
-        _left_img_view.setLayoutParams(params3);
-        _left_img_view.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+
+
+
+        _backView.setCompoundDrawablesRelativeWithIntrinsicBounds(_config.getLeftIRes(),0,0,0);
+//        int width = _config.getLeftImgWidth() == 0 ? KConvertUtils.dp2px(getContext(),22) :_config.getLeftImgWidth();
+//        int height = _config.getLeftImgHeight() == 0 ? KConvertUtils.dp2px(getContext(),22) :_config.getLeftImgHeight();
+
+
+        _backView.setText(KStringUtils.ellipsize(_config.getSubhead(), 5));
+        _backView.setTextColor(_config.getSubheadColor());
+        _backView.setTextSize(_config.getSubheadSize());
 
         if(null != _config.getLeftClickListener()){
             _backView.setOnClickListener(new OnClickListener() {

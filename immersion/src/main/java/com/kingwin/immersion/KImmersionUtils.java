@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.LayoutRes;
@@ -31,13 +32,28 @@ public class KImmersionUtils {
     public static void init(AppCompatActivity activity, @LayoutRes int layputId, KImmersionConfig config){
         activity.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
+        RelativeLayout baseLayout = new RelativeLayout(activity);
+
+        KTitleBar titleBar = new KTitleBar(activity,config);
+        titleBar.setId(R.id.ktitlebar);
 
         ViewGroup inflate = (ViewGroup) LayoutInflater.from(activity).inflate(layputId, null);
-        KTitleBar titleBar = new KTitleBar(activity,config);
-        RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        titleBar.setLayoutParams(params);
-        inflate.addView(titleBar);
-        activity.setContentView(inflate);
+        //baseLayout.addView(inflate, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        if(config.getMainLayoutRule() != -1){
+            lp.addRule(config.getMainLayoutRule(),titleBar.getId());
+        }
+
+        baseLayout.addView(inflate,lp);
+
+
+
+        baseLayout.addView(titleBar, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+
+        activity.setContentView(baseLayout,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         KStatusBarUtils.immersionBar(activity.getWindow());
     }
 

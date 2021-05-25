@@ -2,6 +2,7 @@ package com.kingwin.immersion;
 
 import android.graphics.Color;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -63,7 +64,7 @@ public class KImmersionConfig {
     /**
      * 左图片资源
      */
-    @DrawableRes private final int leftImg;
+    @DrawableRes private final int leftRes;
 
     /**
      * 左图片高度
@@ -74,6 +75,21 @@ public class KImmersionConfig {
      * 左图片宽度
      */
     private final int leftImgWidth;
+
+    /**
+     * 副标题名称
+     */
+    private final String subhead;
+
+    /**
+     * 副标题颜色
+     */
+    @ColorInt private final int subheadColor;
+
+    /**
+     * 副标题尺寸
+     */
+    private final int subheadSize;
 
     /**
      * 标题名称
@@ -101,9 +117,14 @@ public class KImmersionConfig {
     private final List<View> menuList;
 
     /**
-     * 模式
+     * 主视图规则
      */
-    private final int mode;
+    private final int mainLayoutRule;
+
+//    /**
+//     * 模式
+//     */
+//    private final int mode;
 
     /**
      * 是否开启沉浸式
@@ -117,7 +138,7 @@ public class KImmersionConfig {
         mainColor = build.mainColor;
         mainShape = build.mainShape;
         mainHeight = build.mainHeight;
-        leftImg = build.leftImg;
+        leftRes = build.leftRes;
         leftImgHeight = build.leftImgHeight;
         leftImgWidth = build.leftImgWidth;
         isShowLeftView = build.isShowLeftView;
@@ -127,8 +148,11 @@ public class KImmersionConfig {
         titleSize = build.titleSize;
         titleMaxLength = build.titleMaxLength;
         menuList = build.menuList;
-        mode = build.mode;
+        subhead = build.subhead;
+        subheadColor = build.subheadColor;
+        subheadSize = build.subheadSize;
         isOpenImmersion = build.isOpenImmersion;
+        mainLayoutRule = build.mainLayoutRule;
     }
 
     /**
@@ -170,8 +194,8 @@ public class KImmersionConfig {
     /**
      * 左图片资源
      */
-    public int getLeftImg() {
-        return leftImg;
+    public int getLeftIRes() {
+        return leftRes;
     }
 
     /**
@@ -188,12 +212,15 @@ public class KImmersionConfig {
         return leftImgWidth;
     }
 
+
+
     /**
      * 标题名称
      */
     public String getTitleName() {
         return titleName;
     }
+
 
     /**
      * 标题颜色
@@ -209,6 +236,31 @@ public class KImmersionConfig {
         return titleSize;
     }
 
+
+    /**
+     * 副标题
+     */
+    public String getSubhead() {
+        return subhead;
+    }
+
+    /**
+     * 副标题颜色
+     */
+    public int getSubheadColor() {
+        return subheadColor;
+    }
+
+    /**
+     * 副标题尺寸
+     */
+    public float getSubheadSize() {
+        return subheadSize;
+    }
+
+
+
+
     /**
      * 标题最大字数限制
      */
@@ -223,12 +275,6 @@ public class KImmersionConfig {
         return menuList;
     }
 
-    /**
-     * 模式
-     */
-    public int getMode() {
-        return mode;
-    }
 
     /**
      * 是否开启沉浸式
@@ -259,6 +305,12 @@ public class KImmersionConfig {
         return statusHeight;
     }
 
+    /**
+     * 获取主视图关系
+     */
+    public int getMainLayoutRule(){
+        return mainLayoutRule;
+    }
 
     public static class KImmersionConfigBuild{
 
@@ -307,7 +359,7 @@ public class KImmersionConfig {
         /**
          * 左图片资源
          */
-        @DrawableRes private int leftImg;
+        @DrawableRes private int leftRes;
 
         /**
          * 左图片高度
@@ -318,6 +370,8 @@ public class KImmersionConfig {
          * 左图片宽度
          */
         private int leftImgWidth;
+
+
 
         /**
          * 标题名称
@@ -335,6 +389,22 @@ public class KImmersionConfig {
         private int titleSize;
 
         /**
+         * 副标题名称
+         */
+        private String subhead;
+
+        /**
+         * 副标题颜色
+         */
+        @ColorInt private int subheadColor;
+
+        /**
+         * 副标题尺寸
+         */
+        private int subheadSize;
+
+
+        /**
          * 标题最大字数限制
          */
         private int titleMaxLength;
@@ -344,15 +414,20 @@ public class KImmersionConfig {
          */
         private List<View> menuList;
 
-        /**
-         * 模式 默认ImmersionMode.CENTER
-         */
-        private int mode;
+//        /**
+//         * 模式 默认ImmersionMode.CENTER
+//         */
+//        private int mode;
 
         /**
          * 是否开启沉浸式
          */
         private boolean isOpenImmersion;
+
+        /**
+         * 主视图规则
+         */
+        private int mainLayoutRule;
 
 
 
@@ -361,18 +436,21 @@ public class KImmersionConfig {
             statusColor = Color.BLUE;
             mainColor = Color.BLUE;
             titleColor = Color.WHITE;
-            titleSize = 20;
+            titleSize = 22;
             titleMaxLength = 8;
             menuList = new ArrayList<>();
             isOpenImmersion = true;
-            mode = KImmersionMode.CENTER;
+            subhead = "";
+            subheadColor = Color.WHITE;
+            subheadSize = 16;
             isShowLeftView = true;
             leftClickListener = null;
-            leftImg = 0;
+            leftRes = R.drawable.common_back_white;
             leftImgWidth = 0;
             leftImgHeight = 0;
             mainHeight = -1;
             statusHeight = -1;
+            mainLayoutRule = RelativeLayout.BELOW;
         }
 
         /**
@@ -408,6 +486,15 @@ public class KImmersionConfig {
         }
 
         /**
+         * 隐藏
+         */
+        public KImmersionConfigBuild hide() {
+            this.mainHeight = 0;
+            this.statusHeight = 0;
+            return this;
+        }
+
+        /**
          * 标题栏高度
          */
         public KImmersionConfigBuild setMainHeight(int mainHeight) {
@@ -418,8 +505,8 @@ public class KImmersionConfig {
         /**
          * 左图片资源
          */
-        public KImmersionConfigBuild setLeftImg(int leftImg) {
-            this.leftImg = leftImg;
+        public KImmersionConfigBuild setLeftImg(int leftRes) {
+            this.leftRes = leftRes;
             return this;
         }
 
@@ -464,6 +551,30 @@ public class KImmersionConfig {
         }
 
         /**
+         * 副标题
+         */
+        public KImmersionConfigBuild setSubhead(String subhead) {
+            this.subhead = subhead;
+            return this;
+        }
+
+        /**
+         * 标题颜色
+         */
+        public KImmersionConfigBuild setSubheadColor(int SubheadColor) {
+            this.subheadColor = subheadColor;
+            return this;
+        }
+
+        /**
+         * 标题文字尺寸
+         */
+        public KImmersionConfigBuild setSubheadSize(int subheadSize) {
+            this.subheadSize = subheadSize;
+            return this;
+        }
+
+        /**
          * 标题最大字数限制
          */
         public KImmersionConfigBuild setTitleMaxLength(int titleMaxLength) {
@@ -479,13 +590,7 @@ public class KImmersionConfig {
             return this;
         }
 
-        /**
-         * 模式
-         */
-        public KImmersionConfigBuild setMode(int mode) {
-            this.mode = mode;
-            return this;
-        }
+
 
         /**
          * 设置是否开启沉浸式
@@ -519,6 +624,16 @@ public class KImmersionConfig {
             this.statusHeight = statusHeight;
             return this;
         }
+
+        /**
+         * 设置状态栏高度
+         */
+        public KImmersionConfigBuild setMainLayoutRule(int mainLayoutRule) {
+            this.mainLayoutRule = mainLayoutRule;
+            return this;
+        }
+
+
 
         public KImmersionConfig build(){
             return new KImmersionConfig(this);

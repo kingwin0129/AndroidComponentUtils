@@ -17,4 +17,9 @@ public class KImmersionMode {
      * 靠左
      */
     public static int LEFT = 0x11;
+
+    /**
+     * 全中
+     */
+    public static int ALL = 0x33;
 }
