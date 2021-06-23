@@ -14,12 +14,22 @@ import com.kingwin.immersion.KImmersionConfig;
 import com.kingwin.immersion.KImmersionMode;
 import com.kingwin.immersion.KImmersionUtils;
 import com.kingwin.logger.KLogger;
+import com.kingwin.net.KNetWork;
+import com.kingwin.net.callback.BaseNetWorkCallBack;
+import com.kingwin.net.callback.BaseNetWorkCallBackListener;
+import com.kingwin.net.callback.NetResultObject;
+import com.kingwin.net.demo.DMSCallBack;
+import com.kingwin.net.demo.DMSCallBackListener;
+import com.kingwin.net.demo.TestApi;
+import com.kingwin.net.demo.UserParams;
 import com.kingwin.utils.KConvertUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    TextView tv_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 KLogger.d("点击文本");
+                testNet();
             }
         });
         viewList.add(tv);
@@ -66,5 +77,32 @@ public class MainActivity extends AppCompatActivity {
 
         KLogger.d("基础组件输出，成功组装日志组件");
 
+        tv_info = findViewById(R.id.tv_info);
+        tv_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                KLogger.d("点击文本");
+                testNet();
+            }
+        });
+    }
+
+
+    private  void testNet(){
+        TestApi api =  KNetWork.getRetrofit().create(TestApi.class);
+        KNetWork.requestApi(api.login(new UserParams("汤福兴","111111").toJson()), new BaseNetWorkCallBackListener<String>() {
+
+            @Override
+            public void onSucceed(String result) {
+                KNetWork.getCurOkHttpConfig().setToken(result);
+                tv_info.setText(KNetWork.getCurOkHttpConfig().getToken());
+            }
+
+            @Override
+            public void onError(int code,String msg) {
+                tv_info.setText(msg);
+            }
+
+        });
     }
 }

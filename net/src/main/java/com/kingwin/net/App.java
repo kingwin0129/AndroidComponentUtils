@@ -1,4 +1,4 @@
-package com.kingwin.componentutils;
+package com.kingwin.net;
 
 import android.app.Application;
 
@@ -6,23 +6,22 @@ import com.kingwin.logger.KLogger;
 import com.kingwin.net.Interceptor.CustomLogInterceptor;
 import com.kingwin.net.Interceptor.RedirectInterceptor;
 import com.kingwin.net.Interceptor.RetryAndFollowUpInterceptor;
-import com.kingwin.net.KNetWork;
-import com.kingwin.net.KNetWorkConfig;
 
 import okhttp3.Dispatcher;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * @author KingWin
- * @since 2021/4/21 2:41 PM
+ * @since 2021/6/17 4:27 下午
  */
 
 public class App extends Application {
-
     @Override
     public void onCreate() {
         super.onCreate();
         KLogger.init();
         initNetWork();
+
     }
 
     private void initNetWork(){
@@ -34,7 +33,7 @@ public class App extends Application {
                 .setDispatcher(dispatcher)
                 .addInterceptor(new RedirectInterceptor())
                 .addInterceptor(new CustomLogInterceptor())
-                //.addInterceptor(new RetryAndFollowUpInterceptor(3))
+                .addInterceptor(new RetryAndFollowUpInterceptor(3))
                 .build());
     }
 }
