@@ -17,7 +17,7 @@ import com.orhanobut.logger.PrettyFormatStrategy;
  */
 public class KLogger {
 
-    private static final String defaultTag = "KLogger2";
+    private static final String defaultTag = "KingWin";
 
     public static void init(){
         init(new KLogger.Builder().tag(defaultTag));

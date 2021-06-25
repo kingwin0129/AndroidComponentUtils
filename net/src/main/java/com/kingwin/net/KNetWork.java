@@ -85,7 +85,7 @@ public class KNetWork {
     public static <T> void requestApi(final Observable<? extends BaseNetWorkCallBack<T>> baseNetWorkCallBackObservable, BaseNetWorkCallBackListener<T> listener){
 
         baseNetWorkCallBackObservable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(Schedulers.io())
                 .subscribe(new CustomObserver<BaseNetWorkCallBack<T>>() {
                     @Override
                     protected void onFault(Throwable e) {
