@@ -94,4 +94,35 @@ public class KImmersionUtils {
 
         return baseLayout;
     }
+
+
+    /**
+     * 初始化fragment布局
+     * @param fragment 所属碎片
+     * @param rootView 布局视图
+     * @param config 配置文件
+     */
+    public static View inflate(Fragment fragment, LayoutInflater inflater, ViewGroup container, View rootView, KImmersionConfig config){
+
+
+        RelativeLayout baseLayout = new RelativeLayout(fragment.getActivity());
+
+        KTitleBar titleBar = new KTitleBar(fragment.getActivity(),config);
+        titleBar.setId(R.id.ktitlebar);
+
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        if(config.getMainLayoutRule() != -1){
+            lp.addRule(config.getMainLayoutRule(),titleBar.getId());
+        }
+
+        baseLayout.addView(rootView,lp);
+
+
+
+        baseLayout.addView(titleBar, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+
+
+        return baseLayout;
+    }
 }
