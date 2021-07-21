@@ -34,11 +34,17 @@ public class KNetWorkConfig {
      */
     private String token;
 
+    /**
+     * 是否使用RX适配
+     */
+    private Boolean isUseRx;
 
-    KNetWorkConfig(String baseUrl, Dispatcher dispatcher, List<Interceptor> interceptorArr){
+
+    KNetWorkConfig(String baseUrl, Dispatcher dispatcher, List<Interceptor> interceptorArr,Boolean isUseRx){
         this.baseUrl = baseUrl;
         this.dispatcher = dispatcher;
         this.interceptorArr = interceptorArr;
+        this.isUseRx = isUseRx;
     }
 
     public String getBaseUrl(){
@@ -55,6 +61,10 @@ public class KNetWorkConfig {
 
     public String getToken(){
         return token == null ? "" : token;
+    }
+
+    public Boolean getIsUseRx(){
+        return isUseRx;
     }
 
     public void setToken(String str){
@@ -79,7 +89,13 @@ public class KNetWorkConfig {
          */
         private List<Interceptor> interceptorArr;
 
+        /**
+         * 是否使用RX适配
+         */
+        private Boolean isUseRx;
+
         public Builder(){
+            isUseRx = true;
             interceptorArr = new ArrayList<>();
         }
 
@@ -99,8 +115,13 @@ public class KNetWorkConfig {
             return this;
         }
 
+        public Builder isUseRx(Boolean isb){
+            this.isUseRx = isb;
+            return this;
+        }
+
         public KNetWorkConfig build(){
-            return new KNetWorkConfig(this.baseUrl,this.dispatcher,this.interceptorArr);
+            return new KNetWorkConfig(this.baseUrl,this.dispatcher,this.interceptorArr,this.isUseRx);
         }
 
 

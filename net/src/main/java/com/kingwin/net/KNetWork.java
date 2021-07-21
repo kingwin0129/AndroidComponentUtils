@@ -53,12 +53,15 @@ public class KNetWork {
         }
 
 
-        mRetrofit = new Retrofit.Builder()
-                .client(builder.build())
+        Retrofit.Builder rebuild = new Retrofit.Builder();
+        rebuild.client(builder.build())
                 .baseUrl(config.getBaseUrl())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .build();
+                .addConverterFactory(GsonConverterFactory.create());
+
+        if(config.getIsUseRx()){
+            rebuild.addCallAdapterFactory(RxJava3CallAdapterFactory.create());
+        }
+        mRetrofit = rebuild.build();
 
     }
 
