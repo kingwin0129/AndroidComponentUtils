@@ -36,9 +36,16 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onError(int code,String msg) {
+            public void onError(String s) {
+                text.setText(s);
+            }
+
+            @Override
+            public void onFault(int code, String msg) {
                 text.setText(msg);
             }
+
+
 
         });
     }

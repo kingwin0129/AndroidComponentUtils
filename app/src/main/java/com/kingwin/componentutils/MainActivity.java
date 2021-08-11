@@ -99,9 +99,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onError(int code,String msg) {
+            public void onError(String s) {
+                tv_info.setText(s);
+            }
+
+            @Override
+            public void onFault(int code, String msg) {
                 tv_info.setText(msg);
             }
+
 
         });
     }
