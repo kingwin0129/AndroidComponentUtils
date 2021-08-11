@@ -94,18 +94,18 @@ public class KNetWork {
                     protected void onFault(Throwable e) {
                         KLogger.d("网络请求客户端异常==>"+e.getMessage());
                         if (e instanceof HttpException) {     //   HTTP错误
-                            listener.onError(NetResultCode.HttpError,NetResultObject.getErrorMsg(NetResultCode.HttpError));
+                            listener.onFault(NetResultCode.HttpError,NetResultObject.getErrorMsg(NetResultCode.HttpError));
                         } else if (e instanceof ConnectException
                                 || e instanceof UnknownHostException) {   //   连接错误
-                            listener.onError(NetResultCode.ConnectError,NetResultObject.getErrorMsg(NetResultCode.ConnectError));
+                            listener.onFault(NetResultCode.ConnectError,NetResultObject.getErrorMsg(NetResultCode.ConnectError));
                         } else if (e instanceof InterruptedIOException) {   //  连接超时
-                            listener.onError(NetResultCode.TimeOut,NetResultObject.getErrorMsg(NetResultCode.TimeOut));
+                            listener.onFault(NetResultCode.TimeOut,NetResultObject.getErrorMsg(NetResultCode.TimeOut));
                         } else if (e instanceof JsonParseException
                                 || e instanceof JSONException
                                 || e instanceof ParseException) {   //  解析错误
-                            listener.onError(NetResultCode.ParseError,NetResultObject.getErrorMsg(NetResultCode.ParseError));
+                            listener.onFault(NetResultCode.ParseError,NetResultObject.getErrorMsg(NetResultCode.ParseError));
                         } else {
-                            listener.onError(NetResultCode.UNKNOWN_ERROR,NetResultObject.getErrorMsg(NetResultCode.UNKNOWN_ERROR));
+                            listener.onFault(NetResultCode.UNKNOWN_ERROR,NetResultObject.getErrorMsg(NetResultCode.UNKNOWN_ERROR));
                         }
                         onFinish();
                     }
@@ -118,7 +118,7 @@ public class KNetWork {
                         if(netResultObject.isSucceed()){
                             listener.onSucceed((T) netResultObject.getResult());
                         }else{
-                            listener.onError(netResultObject.getCode(),netResultObject.getErrorMsg());
+                            listener.onError((T) netResultObject.getResult());
                         }
 
                     }

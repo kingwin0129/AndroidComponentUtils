@@ -15,13 +15,19 @@ public interface BaseNetWorkCallBackListener<T> {
      */
     void onSucceed(T t);
 
+    /**
+     * 请求错误
+     * @param t 返回对象
+     */
+    void onError(T t);
+
 
     /**
-     * 服务器返回错误
+     * 请求故障
      * @param code 错误码
      * @param msg 错误信息
      */
-    void onError(int code,String msg);
+    void onFault(int code,String msg);
 
 
 
