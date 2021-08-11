@@ -13,13 +13,13 @@ public interface BaseNetWorkCallBackListener<T> {
      * 成功
      * @param t 返回对象
      */
-    void onSucceed(T t);
+    void onSucceed(BaseNetWorkCallBack<T> t);
 
-    /**
-     * 请求错误
-     * @param t 返回对象
-     */
-    void onError(T t);
+//    /**
+//     * 请求错误
+//     * @param t 返回对象
+//     */
+//    void onError(String t);
 
 
     /**

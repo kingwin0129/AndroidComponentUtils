@@ -114,12 +114,13 @@ public class KNetWork {
 
                     @Override
                     protected void onSuccess(BaseNetWorkCallBack<T> callBackObj) {
-                        NetResultObject<BaseNetWorkCallBack> netResultObject = new NetResultObject((BaseNetWorkCallBack) callBackObj);
-                        if(netResultObject.isSucceed()){
-                            listener.onSucceed((T) netResultObject.getResult());
-                        }else{
-                            listener.onError((T) callBackObj.getMsg());
-                        }
+                        listener.onSucceed(callBackObj);
+//                        NetResultObject<BaseNetWorkCallBack> netResultObject = new NetResultObject((BaseNetWorkCallBack) callBackObj);
+//                        if(netResultObject.isSucceed()){
+//                            listener.onSucceed((T) netResultObject.getResult());
+//                        }else{
+//                            listener.onError(callBackObj.getMsg());
+//                        }
                     }
 //                        if(null == callBackObj){
 //                            listener.onError("服务器异常,请稍后再试(错误代码:e002)");

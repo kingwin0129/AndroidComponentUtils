@@ -26,18 +26,14 @@ public class MainActivity extends AppCompatActivity {
     public void testCall(){
         TextView text = findViewById(R.id.tv_info);
         TestApi api =  KNetWork.getRetrofit().create(TestApi.class);
-        KNetWork.requestApi(api.login(KNetWork.beanToRequestBody(new UserParams("汤福兴","111111"))), new DMSCallBackListener<String>() {
+        KNetWork.requestApi(api.login(KNetWork.beanToRequestBody(new UserParams("汤福兴","11111"))), new DMSCallBackListener<String>() {
+
 
             @Override
-            public void onSucceed(String result) {
-                KNetWork.getCurOkHttpConfig().setToken(result);
+            public void onSucceed(BaseNetWorkCallBack<String> t) {
+                KNetWork.getCurOkHttpConfig().setToken(t.getData());
                 text.setText(KNetWork.getCurOkHttpConfig().getToken());
 
-            }
-
-            @Override
-            public void onError(String s) {
-                text.setText(s);
             }
 
             @Override

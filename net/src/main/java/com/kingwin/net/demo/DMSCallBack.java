@@ -28,6 +28,11 @@ public class DMSCallBack<T> extends BaseNetWorkCallBack<T> {
     }
 
     @Override
+    public String getMsg() {
+        return message;
+    }
+
+    @Override
     public T getData() {
         return data;
     }

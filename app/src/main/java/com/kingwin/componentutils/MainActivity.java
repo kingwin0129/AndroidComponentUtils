@@ -2,6 +2,7 @@ package com.kingwin.componentutils;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -31,10 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tv_info;
 
+    Handler mHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mHandler = new Handler();
         List<View> viewList = new ArrayList<>();
 
         TextView tv  = new TextView(this);
@@ -92,20 +95,29 @@ public class MainActivity extends AppCompatActivity {
         TestApi api =  KNetWork.getRetrofit().create(TestApi.class);
         KNetWork.requestApi(api.login(new UserParams("汤福兴","111111").toJson()), new BaseNetWorkCallBackListener<String>() {
 
-            @Override
-            public void onSucceed(String result) {
-                KNetWork.getCurOkHttpConfig().setToken(result);
-                tv_info.setText(KNetWork.getCurOkHttpConfig().getToken());
-            }
+
 
             @Override
-            public void onError(String s) {
-                tv_info.setText(s);
+            public void onSucceed(BaseNetWorkCallBack<String> t) {
+                KNetWork.getCurOkHttpConfig().setToken(t.getData());
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        tv_info.setText(KNetWork.getCurOkHttpConfig().getToken());
+                    }
+                });
+
             }
 
             @Override
             public void onFault(int code, String msg) {
-                tv_info.setText(msg);
+
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        tv_info.setText(msg);
+                    }
+                });
             }
 
 
