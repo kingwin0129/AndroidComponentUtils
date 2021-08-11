@@ -10,6 +10,8 @@ public abstract class BaseNetWorkCallBack<T> {
 
     public abstract int getCode();
 
+    public abstract String getMsg();
+
     public abstract T getData();
 
     public abstract boolean isSucceed();

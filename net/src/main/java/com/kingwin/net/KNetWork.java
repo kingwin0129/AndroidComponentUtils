@@ -118,9 +118,8 @@ public class KNetWork {
                         if(netResultObject.isSucceed()){
                             listener.onSucceed((T) netResultObject.getResult());
                         }else{
-                            listener.onError((T) netResultObject.getResult());
+                            listener.onError((T) callBackObj.getMsg());
                         }
-
                     }
 //                        if(null == callBackObj){
 //                            listener.onError("服务器异常,请稍后再试(错误代码:e002)");
