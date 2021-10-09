@@ -64,6 +64,40 @@ public class KImmersionUtils {
 
 
     /**
+     * 初始化布局
+     * @param activity 所属界面
+     * @param rootView 布局视图
+     * @param config 配置文件
+     */
+    public static void init(Activity activity, View rootView, KImmersionConfig config){
+        if(activity instanceof AppCompatActivity){
+            ((AppCompatActivity)activity).supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
+
+
+        RelativeLayout baseLayout = new RelativeLayout(activity);
+
+        KTitleBar titleBar = new KTitleBar(activity,config);
+        titleBar.setId(R.id.ktitlebar);
+
+
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        if(config.getMainLayoutRule() != -1){
+            lp.addRule(config.getMainLayoutRule(),titleBar.getId());
+        }
+
+        baseLayout.addView(rootView,lp);
+
+
+
+        baseLayout.addView(titleBar, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+
+        activity.setContentView(baseLayout,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        KStatusBarUtils.immersionBar(activity.getWindow());
+    }
+
+    /**
      * 初始化fragment布局
      * @param fragment 所属碎片
      * @param layputId 布局id

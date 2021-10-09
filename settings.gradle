@@ -4,3 +4,4 @@ include ':logger'
 include ':app'
 rootProject.name = "ComponentUtils"
 include ':net'
+include ':loading-view'
