@@ -275,37 +275,19 @@ public class SingleSelectDialog extends Dialog {
     private void initAdapter(){
         KRecycleView recyclerView = findViewById(R.id.rl_view);
 
-        mAdapter = new KCommonAdapter(this.mData, new KCommonAdapter.onBindViewListener<String>() {
-            @Override
-            public int getLayoutId(int viewType) {
-                return R.layout.itemview_testviewholder;
-            }
-
-            @Override
-            public void onBindViewHolder(@NonNull KCommonViewHolder holder, String data, int position) {
-                holder.setText(R.id.tv_info,data).setImageResource(R.id.iv_icon,R.drawable.ic_launcher_background);
-                CheckBox checkBox = holder.getView(R.id.cb_sel);
-                checkBox.setChecked(position % 2 == 0);
-
-            }
-
-            @Override
-            public int getItemViewType(int pos) {
-                return 0;
-            }
-        });
+        mAdapter = new KCommonAdapter(this.mData, null);
 
         recyclerView.setAdapter(mAdapter);
-//        mAdapter.setClickListener(new SingleSelectAdapter.onSelectListener() {
-//            @Override
-//            public void select(int index) {
-//                if(null != mListener){
-//                    mListener.select(index);
-//                }
-//
-//                dismiss();
-//            }
-//        });
+        mAdapter.setClickListener(new KCommonAdapter.onSelectListener() {
+            @Override
+            public void select(int index) {
+                if(null != mListener){
+                    mListener.select(index);
+                }
+
+                dismiss();
+            }
+        });
 
     }
 

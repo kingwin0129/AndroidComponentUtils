@@ -21,6 +21,8 @@ public class KCommonAdapter<T> extends RecyclerView.Adapter<KCommonViewHolder> {
 
     private onBindViewListener mOnBindViewListener;
 
+    private onSelectListener mClickListener;
+
     public KCommonAdapter(List<T> list){
         mList = list;
     }
@@ -38,7 +40,7 @@ public class KCommonAdapter<T> extends RecyclerView.Adapter<KCommonViewHolder> {
         if(null != mOnBindViewListener){
             layoutId = mOnBindViewListener.getLayoutId(viewType);
         }
-        return new KCommonViewHolder(LayoutInflater.from(parent.getContext()).inflate(layoutId,parent,false));
+        return new KCommonViewHolder(LayoutInflater.from(parent.getContext()).inflate(layoutId,parent,false),mClickListener);
     }
 
     @Override
@@ -68,6 +70,21 @@ public class KCommonAdapter<T> extends RecyclerView.Adapter<KCommonViewHolder> {
             return 0;
         }
         return mOnBindViewListener.getItemViewType(position);
+    }
+
+    public void setClickListener(onSelectListener listener){
+        mClickListener = listener;
+    }
+
+    /**
+     * 择结果监听器
+     */
+    public interface onSelectListener{
+        /**
+         * 选择结果
+         * @param index 选择数据的下标
+         */
+        void select(int index);
     }
 
     public interface onBindViewListener<T>{

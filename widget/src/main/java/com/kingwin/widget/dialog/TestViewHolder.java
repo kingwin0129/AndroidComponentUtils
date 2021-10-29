@@ -14,6 +14,6 @@ import com.kingwin.widget.adapter.KCommonViewHolder;
 class TestViewHolder extends KCommonViewHolder {
 
     public TestViewHolder(@NonNull View itemView) {
-        super(itemView);
+        super(itemView,null);
     }
 }

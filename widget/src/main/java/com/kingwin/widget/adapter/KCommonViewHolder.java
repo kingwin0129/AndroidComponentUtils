@@ -22,10 +22,21 @@ public class KCommonViewHolder extends RecyclerView.ViewHolder {
 
     TextView tvDefaultText;
 
-    public KCommonViewHolder(@NonNull View itemView) {
+    KCommonViewHolder curView;
+
+    public KCommonViewHolder(@NonNull View itemView,KCommonAdapter.onSelectListener listener) {
         super(itemView);
         mViews = new SparseArray<>();
         tvDefaultText = itemView.findViewById(R.id.tv_default_text);
+        curView = this;
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(null != listener){
+                    listener.select(curView.getAdapterPosition());
+                }
+            }
+        });
     }
 
     public void setDefaultText(String str){
@@ -74,5 +85,16 @@ public class KCommonViewHolder extends RecyclerView.ViewHolder {
         ImageView iv = getView(viewId);
         iv.setImageResource(resId);
         return this;
+    }
+
+    /**
+     * 择结果监听器
+     */
+    public interface onSelectListener{
+        /**
+         * 选择结果
+         * @param index 选择数据的下标
+         */
+        void select(int index);
     }
 }

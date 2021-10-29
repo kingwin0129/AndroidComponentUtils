@@ -53,7 +53,7 @@ public class KRecycleView extends RecyclerView {
         mOrientation = ta.getInt(R.styleable.KRecycleView_orientation,LinearLayout.VERTICAL);
         mSpanCount = ta.getInt(R.styleable.KRecycleView_spanCount, 1);
         mSpanSize = ta.getDimension(R.styleable.KRecycleView_spanSize, -1);
-        mSpanColor = ta.getInt(R.styleable.KRecycleView_spanColor, R.color.black);
+        mSpanColor = ta.getInt(R.styleable.KRecycleView_spanColor, R.color.grey);
         //mDrawableId = ta.getResourceId(R.styleable.KRecycleView_divider, -1);
         mSpanCount = mSpanCount < 1 ? 1 : mSpanCount;
         addItemDecoration(new GridDivider(getContext(),mSpanCount,mSpanSize,mSpanColor));
