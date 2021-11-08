@@ -6,15 +6,16 @@ if(isUtilModul.toBoolean()){
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         if(!isUtilModul.toBoolean()){
             applicationId "com.kingwin.utils"
         }
         minSdkVersion 19
-        targetSdkVersion 30
+        //noinspection ExpiredTargetSdkVersion
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 

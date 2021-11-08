@@ -105,7 +105,22 @@ public class SingleSelectDialog extends Dialog {
     private KCommonAdapter mAdapter;
 
 
-    public SingleSelectDialog(@NonNull Context context) {
+    public Sinnew KCommonAdapter.onBindViewListener() {
+        @Override
+        public int getLayoutId(int viewType) {
+            return 0;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull KCommonViewHolder holder, Object data, int position) {
+
+        }
+
+        @Override
+        public int getItemViewType(int pos) {
+            return 0;
+        }
+    }gleSelectDialog(@NonNull Context context) {
         this(context, R.style.MyDialog);
     }
 
@@ -275,7 +290,22 @@ public class SingleSelectDialog extends Dialog {
     private void initAdapter(){
         KRecycleView recyclerView = findViewById(R.id.rl_view);
 
-        mAdapter = new KCommonAdapter(this.mData, null);
+        mAdapter = new KCommonAdapter(this.mData, new KCommonAdapter.onBindViewListener() {
+            @Override
+            public int getLayoutId(int viewType) {
+                return 0;
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull KCommonViewHolder holder, Object data, int position) {
+
+            }
+
+            @Override
+            public int getItemViewType(int pos) {
+                return 0;
+            }
+        });
 
         recyclerView.setAdapter(mAdapter);
         mAdapter.setClickListener(new KCommonAdapter.onSelectListener() {
