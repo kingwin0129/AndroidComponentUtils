@@ -22,7 +22,7 @@ import java.util.List;
  * @since 2021/11/4 11:05 上午
  */
 
-class KFileUtils {
+public class KFileUtils {
 
 
     /**

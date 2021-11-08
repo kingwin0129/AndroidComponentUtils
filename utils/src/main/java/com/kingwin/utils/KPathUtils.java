@@ -11,7 +11,7 @@ import java.io.File;
  * @since 2021/11/5 4:10 下午
  */
 
-class KPathUtils {
+public class KPathUtils {
 
     private static final char SEP = File.separatorChar;
     

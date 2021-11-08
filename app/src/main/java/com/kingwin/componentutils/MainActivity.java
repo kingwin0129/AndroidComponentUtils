@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         viewList.add(iv);
 
 
+
         KImmersionConfig config = new KImmersionConfig.KImmersionConfigBuild()
                 .hide()
                 .setLeftClickListener(new KImmersionConfig.LeftViewClick() {
