@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="adapter/src/main/res/layout/itemview_default.xml" value="0.19429347826086957" />
+        <entry key="app/src/main/res/layout/activity_pdf.xml" value="0.1953125" />
         <entry key="dialog/src/main/res/drawable/divider_mileage.xml" value="0.16927083333333334" />
         <entry key="dialog/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
         <entry key="dialog/src/main/res/layout/dialog_single.xml" value="0.33" />

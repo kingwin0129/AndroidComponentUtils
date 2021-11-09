@@ -12,6 +12,8 @@ import com.kingwin.net.callback.NetResultObject;
 
 import org.json.JSONException;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InterruptedIOException;
 import java.net.ConnectException;
 import java.net.UnknownHostException;
@@ -20,10 +22,14 @@ import java.text.ParseException;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 import retrofit2.HttpException;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
@@ -144,6 +150,20 @@ public class KNetWork {
 //                    }
                 });
     }
+
+
+
+    public static void downloadFile(String url,Callback callback){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder().url(url).build();
+        if(null != callback){
+            okHttpClient.newCall(request).enqueue(callback);
+        }
+
+    }
+
+
+
 
 
 }

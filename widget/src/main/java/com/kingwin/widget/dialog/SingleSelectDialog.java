@@ -105,25 +105,9 @@ public class SingleSelectDialog extends Dialog {
     private KCommonAdapter mAdapter;
 
 
-    public Sinnew KCommonAdapter.onBindViewListener() {
-        @Override
-        public int getLayoutId(int viewType) {
-            return 0;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull KCommonViewHolder holder, Object data, int position) {
-
-        }
-
-        @Override
-        public int getItemViewType(int pos) {
-            return 0;
-        }
-    }gleSelectDialog(@NonNull Context context) {
+    public SingleSelectDialog(@NonNull Context context) {
         this(context, R.style.MyDialog);
     }
-
     public SingleSelectDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
         iscancelable = true;

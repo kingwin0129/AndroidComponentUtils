@@ -1,5 +1,6 @@
 package com.kingwin.componentutils;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,9 +25,18 @@ import com.kingwin.net.demo.DMSCallBackListener;
 import com.kingwin.net.demo.TestApi;
 import com.kingwin.net.demo.UserParams;
 import com.kingwin.utils.KConvertUtils;
+import com.kingwin.utils.KFileUtils;
+import com.kingwin.utils.KPathUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         viewList.add(iv);
 
 
-
         KImmersionConfig config = new KImmersionConfig.KImmersionConfigBuild()
                 .hide()
                 .setLeftClickListener(new KImmersionConfig.LeftViewClick() {
@@ -86,7 +95,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 KLogger.d("点击文本");
-                testNet();
+                Intent t = new Intent(MainActivity.this,PdfActivity.class);
+                startActivity(t);
+//                KNetWork.downloadFile("http://221.181.173.253:8018/Affairs/ShowFile?filePath=/YmsFileUpload/AffairGuidFiles/RSZ047.pdf", new Callback() {
+//                    @Override
+//                    public void onFailure(Call call, IOException e) {
+//                        KLogger.d("下载失败");
+//                    }
+//
+//                    @Override
+//                    public void onResponse(Call call, Response response) throws IOException {
+//                        KLogger.d("下载成功");
+//                        InputStream inputStream = response.body().byteStream();
+//                        if(null != inputStream){
+//                            String savePath = KPathUtils.getExternalAppPicturesPath() + File.separator + "curAffair.pdf";
+//                            //KFileUtils.createFile(savePath);
+//                            Boolean isDownloadFile = KFileUtils.writeFileFromIS(savePath,inputStream,false);
+//                            if(isDownloadFile){
+//                                KLogger.d("保存成功");
+//                            }else{
+//                                KLogger.d("保存失败");
+//                            }
+//
+//                        }
+//                    }
+//                });
+                //testNet();
             }
         });
     }
